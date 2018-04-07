@@ -19,6 +19,8 @@ public class CityListActivity extends MvpAppCompatActivity implements CityListVi
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_list);
+
+        cityListPresenter.getWeatherForCity("Omsk");
     }
 
     @Override

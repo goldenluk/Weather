@@ -5,41 +5,44 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
+import lombok.Getter;
+
+@Getter
 public class WeatherDto implements Serializable {
 
     @SerializedName("coord")
-    public Coord coord;
+    private Coord coord;
 
     @SerializedName("weather")
-    public List<Weather> weather = null;
+    private List<Weather> weather = null;
 
     @SerializedName("base")
-    public String base;
+    private String base;
 
     @SerializedName("main")
-    public Main main;
+    private Main main;
 
     @SerializedName("visibility")
-    public Integer visibility;
+    private Integer visibility;
 
     @SerializedName("wind")
-    public Wind wind;
+    private Wind wind;
 
     @SerializedName("clouds")
-    public Clouds clouds;
+    private Clouds clouds;
 
     @SerializedName("dt")
-    public Integer dt;
+    private Integer dt;
 
     @SerializedName("sys")
-    public Sys sys;
+    private Sys sys;
 
     @SerializedName("id")
-    public Integer id;
+    private Integer id;
 
     @SerializedName("name")
-    public String name;
+    private String name;
 
     @SerializedName("cod")
-    public Integer cod;
+    private Integer cod;
 }
