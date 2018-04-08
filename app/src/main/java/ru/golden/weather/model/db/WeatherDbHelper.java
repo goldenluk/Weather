@@ -4,8 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static ru.golden.weather.model.db.WeatherContract.SQL_CREATE_WEATHER_ENTRIES;
-import static ru.golden.weather.model.db.WeatherContract.SQL_DELETE_WEATHER_ENTRIES;
+import ru.golden.weather.model.db.tables.WeatherTable;
 
 public class WeatherDbHelper extends SQLiteOpenHelper {
 
@@ -18,12 +17,10 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(final SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(SQL_CREATE_WEATHER_ENTRIES);
+        sqLiteDatabase.execSQL(WeatherTable.getCreateTableQuery());
     }
 
     @Override
     public void onUpgrade(final SQLiteDatabase sqLiteDatabase, final int oldVersion, final int newVersion) {
-        sqLiteDatabase.execSQL(SQL_DELETE_WEATHER_ENTRIES);
-        onCreate(sqLiteDatabase);
     }
 }
