@@ -6,8 +6,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class WeatherDto implements Serializable {
 
     @SerializedName("coord")
@@ -45,4 +47,6 @@ public class WeatherDto implements Serializable {
 
     @SerializedName("cod")
     private Integer cod;
+
+    private String lastUpdate;
 }

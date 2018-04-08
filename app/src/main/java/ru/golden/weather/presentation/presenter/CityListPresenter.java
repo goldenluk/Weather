@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.pushtorefresh.storio3.sqlite.operations.delete.DeleteResult;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class CityListPresenter extends MvpPresenter<CityListView> {
         currentWeatherRepository = new CurrentWeatherRepository(context);
     }
 
-    private void getWeatherForCity(final String cityName) {
+    public void getWeatherForCity(final String cityName) {
         currentWeatherRepository.loadCity(cityName)
                 .subscribe(this::onCityLoadSuccess, this::onCityLoadFailed);
     }
@@ -67,5 +68,15 @@ public class CityListPresenter extends MvpPresenter<CityListView> {
     private void initDefaultCities() {
         getWeatherForCity(DEFAULT_CITY);
         getWeatherForCity(DEFAULT_CITY_2);
+    }
+
+    public void deleteCity(final String cityName) {
+        currentWeatherRepository.deleteCity(cityName)
+                .subscribe(this::onCityDeleted);
+    }
+
+    private void onCityDeleted(final DeleteResult deleteResult) {
+        getViewState().showMessage(R.string.city_deleted);
+        getViewState().updateCityList();
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
+import com.pushtorefresh.storio3.sqlite.operations.delete.DeleteResult;
 import com.pushtorefresh.storio3.sqlite.operations.put.PutResult;
 
 import java.io.IOException;
@@ -52,6 +53,13 @@ public class CurrentWeatherRepository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Single<DeleteResult> deleteCity(final String cityName) {
+        return Single.just(cityName)
+                .map(dataSource::deleteCity)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     @Nullable
     public WeatherDto createDtoFromResponse(final Response response) {
         val gson = new Gson();
@@ -76,4 +84,6 @@ public class CurrentWeatherRepository {
 
         return createDtoFromResponse(response);
     }
+
+
 }

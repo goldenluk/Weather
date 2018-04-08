@@ -29,14 +29,42 @@
             card_view:layout_constraintTop_toBottomOf="@id/city_name"
             tools:text="Current temp 12 C"/>
 
+        <TextView
+            android:id="@+id/last_update_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            card_view:layout_constraintTop_toBottomOf="@id/current_weather"
+            tools:text="Last update time - time"/>
+
+        <Button
+            android:id="@+id/delete_city_button"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_city"
+            android:textSize="12sp"
+            card_view:layout_constraintTop_toBottomOf="@id/last_update_time"/>
+
+        <Button
+            android:id="@+id/update_city_button"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update_city"
+            android:textSize="12sp"
+            card_view:layout_constraintStart_toEndOf="@string/delete_city"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/last_update_time"/>
+
         <Button
             android:id="@+id/detail_weather_info_button"
             style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:text="@string/details_button_text"
-            card_view:layout_constraintTop_toBottomOf="@id/current_weather"
+            android:textSize="12sp"
+            card_view:layout_constraintTop_toBottomOf="@id/update_city_button"
             tools:text="More info"/>
 
     </android.support.constraint.ConstraintLayout>

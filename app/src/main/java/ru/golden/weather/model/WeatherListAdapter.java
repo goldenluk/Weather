@@ -1,21 +1,26 @@
 package ru.golden.weather.model;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
 
+import lombok.val;
 import ru.golden.weather.R;
 import ru.golden.weather.model.dto.WeatherDto;
+import ru.golden.weather.ui.CityListActivity;
 
 public class WeatherListAdapter extends RecyclerView.Adapter<WeatherListAdapter.ViewHolder> {
 
     private static final double kelvin = 273.15;
 
-    private List<WeatherDto> citiesWeather;
+    private final List<WeatherDto> citiesWeather;
+    private final Context context;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private final View citiesWeatherView;
@@ -26,8 +31,9 @@ public class WeatherListAdapter extends RecyclerView.Adapter<WeatherListAdapter.
         }
     }
 
-    public WeatherListAdapter(final List<WeatherDto> citiesWeather) {
+    public WeatherListAdapter(final List<WeatherDto> citiesWeather, final Context context) {
         this.citiesWeather = citiesWeather;
+        this.context = context;
     }
 
     @Override
@@ -40,7 +46,7 @@ public class WeatherListAdapter extends RecyclerView.Adapter<WeatherListAdapter.
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final WeatherDto weatherItem = citiesWeather.get(position);
+        val weatherItem = citiesWeather.get(position);
 
         final TextView cityName = holder.citiesWeatherView.findViewById(R.id.city_name);
         cityName.setText(weatherItem.getName());
@@ -49,7 +55,22 @@ public class WeatherListAdapter extends RecyclerView.Adapter<WeatherListAdapter.
         currentWeather.setText(holder.citiesWeatherView.getContext()
                 .getString(R.string.current_temp, String.valueOf(weatherItem.getMain().getTemp() - kelvin).substring(0, 5)));
 
-        //TODO Кнопка подробности
+        final TextView lastUpdateTime = holder.citiesWeatherView.findViewById(R.id.last_update_time);
+        lastUpdateTime.setText(context.getString(R.string.last_update_time, weatherItem.getLastUpdate()));
+
+        final Button deleteButton = holder.citiesWeatherView.findViewById(R.id.delete_city_button);
+        deleteButton.setOnClickListener(view -> {
+            if (context instanceof CityListActivity) {
+                ((CityListActivity) context).deleteCity(weatherItem.getName());
+            }
+        });
+
+        final Button updateButton = holder.citiesWeatherView.findViewById(R.id.update_city_button);
+        updateButton.setOnClickListener(view -> {
+            if (context instanceof CityListActivity) {
+                ((CityListActivity) context).updateCity(weatherItem.getName());
+            }
+        });
     }
 
     @Override

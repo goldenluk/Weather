@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.pushtorefresh.storio3.sqlite.StorIOSQLite;
 import com.pushtorefresh.storio3.sqlite.impl.DefaultStorIOSQLite;
+import com.pushtorefresh.storio3.sqlite.operations.delete.DeleteResult;
 import com.pushtorefresh.storio3.sqlite.operations.put.PutResult;
 import com.pushtorefresh.storio3.sqlite.queries.DeleteQuery;
 import com.pushtorefresh.storio3.sqlite.queries.Query;
@@ -27,14 +28,7 @@ public class WeatherListDataSource {
     }
 
     public PutResult storeCityWeather(final WeatherSql weatherSql) {
-        storIOSQLite.delete()
-                .byQuery(DeleteQuery.builder()
-                        .table(WeatherTable.TABLE)
-                        .where(WeatherTable.COLUMN_NAME + " = ?")
-                        .whereArgs(weatherSql.getName())
-                        .build())
-                .prepare()
-                .executeAsBlocking();
+        deleteCity(weatherSql.getName());
 
         return storIOSQLite
                 .put()
@@ -48,6 +42,18 @@ public class WeatherListDataSource {
                 .get()
                 .listOfObjects(WeatherSql.class)
                 .withQuery(Query.builder().table(WeatherTable.TABLE).build())
+                .prepare()
+                .executeAsBlocking();
+    }
+
+    public DeleteResult deleteCity(final String cityName) {
+        return storIOSQLite
+                .delete()
+                .byQuery(DeleteQuery.builder()
+                        .table(WeatherTable.TABLE)
+                        .where(WeatherTable.COLUMN_NAME + " = ?")
+                        .whereArgs(cityName)
+                        .build())
                 .prepare()
                 .executeAsBlocking();
     }

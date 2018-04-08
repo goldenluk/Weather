@@ -9,4 +9,8 @@
     <string name="find_city_button_text">Find</string>
     <string name="bad_find">City not found or server has problems</string>
     <string name="city_finded">City successfully add</string>
+    <string name="last_update_time">Last update time: %s</string>
+    <string name="update_city">Update</string>
+    <string name="delete_city">Delete</string>
+    <string name="city_deleted">City deleted</string>
 </resources>

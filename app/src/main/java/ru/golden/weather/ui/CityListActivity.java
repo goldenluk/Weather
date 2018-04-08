@@ -62,7 +62,13 @@ public class CityListActivity extends BaseActivity implements CityListView {
     public void updateCityList(final List<WeatherDto> cities) {
         progressBar.setVisibility(View.GONE);
         //it should be improved
-        weatherCityList.setAdapter(new WeatherListAdapter(cities));
+        weatherCityList.setAdapter(new WeatherListAdapter(cities, this));
+    }
+
+    @Override
+    public void updateCityList() {
+        progressBar.setVisibility(View.GONE);
+        cityListPresenter.initList();
     }
 
     @Override
@@ -95,5 +101,15 @@ public class CityListActivity extends BaseActivity implements CityListView {
     @Override
     public void stopProgress() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    public void deleteCity(final String cityName) {
+        progressBar.setVisibility(View.VISIBLE);
+        cityListPresenter.deleteCity(cityName);
+    }
+
+    public void updateCity(final String cityName) {
+        progressBar.setVisibility(View.VISIBLE);
+        cityListPresenter.getWeatherForCity(cityName);
     }
 }

@@ -2,8 +2,9 @@ package ru.golden.weather.model;
 
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import lombok.val;
@@ -18,7 +19,12 @@ public class WeatherConverter {
         val weatherSql = new WeatherSql();
         weatherSql.setJson(gson.toJson(weatherDto));
         weatherSql.setName(weatherDto.getName());
-        weatherSql.setDate(new Date(weatherDto.getDt()).toString());
+
+        val df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        val today = Calendar.getInstance().getTime();
+        val date = df.format(today);
+
+        weatherSql.setDate(date);
 
         return weatherSql;
     }
@@ -28,7 +34,9 @@ public class WeatherConverter {
         val gson = new Gson();
 
         for (final WeatherSql weatherSql : weatherSqls) {
-            newList.add(gson.fromJson(weatherSql.getJson(), WeatherDto.class));
+            val weather = gson.fromJson(weatherSql.getJson(), WeatherDto.class);
+            weather.setLastUpdate(weatherSql.getDate());
+            newList.add(weather);
         }
 
         return newList;
