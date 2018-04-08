@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -39,6 +41,9 @@ public class CityListActivity extends BaseActivity implements CityListView {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    @BindView(R.id.progress_loading)
+    ProgressBar progressBar;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +60,7 @@ public class CityListActivity extends BaseActivity implements CityListView {
 
     @Override
     public void updateCityList(final List<WeatherDto> cities) {
+        progressBar.setVisibility(View.GONE);
         //it should be improved
         weatherCityList.setAdapter(new WeatherListAdapter(cities));
     }
@@ -84,5 +90,10 @@ public class CityListActivity extends BaseActivity implements CityListView {
                 cityListPresenter.initList();
             }
         }
+    }
+
+    @Override
+    public void stopProgress() {
+        progressBar.setVisibility(View.GONE);
     }
 }

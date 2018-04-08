@@ -2,8 +2,10 @@ package ru.golden.weather.ui;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -36,6 +38,9 @@ public class AddCityActivity extends BaseActivity implements AddCityView {
     @BindView(R.id.find_button)
     Button findButton;
 
+    @BindView(R.id.progress_loading_adding_city)
+    ProgressBar progressBar;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +48,7 @@ public class AddCityActivity extends BaseActivity implements AddCityView {
 
         ButterKnife.bind(this);
 
+        progressBar.setVisibility(View.GONE);
         setSupportActionBar(toolbar);
 
         val supportActionBar = getSupportActionBar();
@@ -53,13 +59,22 @@ public class AddCityActivity extends BaseActivity implements AddCityView {
 
     @OnClick(R.id.find_button)
     public void onFindButtonClick() {
+        progressBar.setVisibility(View.VISIBLE);
+        findButton.setEnabled(false);
         addCityPresenter.findAndTryAddCity(cityNameEditText.getText().toString());
     }
 
     @Override
     public void finishWithOk() {
+        stopProgress();
         showMessage(R.string.city_finded);
         setResult(RESULT_OK);
         finish();
+    }
+
+    @Override
+    public void stopProgress() {
+        progressBar.setVisibility(View.GONE);
+        findButton.setEnabled(true);
     }
 }

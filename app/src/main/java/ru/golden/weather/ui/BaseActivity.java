@@ -7,7 +7,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import ru.golden.weather.presentation.view.BaseView;
 
 
-public class BaseActivity extends MvpAppCompatActivity implements BaseView {
+public abstract class BaseActivity extends MvpAppCompatActivity implements BaseView {
 
     @Override
     public void showMessage(final int messageId) {

@@ -27,6 +27,7 @@ public class AddCityPresenter extends MvpPresenter<AddCityView> {
     }
 
     private void onCityFindFailed(final Throwable throwable) {
+        getViewState().stopProgress();
         getViewState().showMessage(R.string.bad_find);
     }
 

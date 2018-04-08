@@ -15,4 +15,6 @@ public interface BaseView extends MvpView {
      * Showing message
      */
     void showMessage(final String message);
+
+    void stopProgress();
 }

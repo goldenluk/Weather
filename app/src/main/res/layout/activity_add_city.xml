@@ -44,4 +44,10 @@
         android:text="@string/find_city_button_text"
         app:layout_constraintTop_toBottomOf="@id/city_name_edit_text"/>
 
+    <ProgressBar
+        android:id="@+id/progress_loading_adding_city"
+        android:layout_margin="@dimen/spacing_huge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </android.support.constraint.ConstraintLayout>
