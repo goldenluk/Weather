@@ -4,12 +4,9 @@ import android.content.Context;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.pushtorefresh.storio3.sqlite.operations.delete.DeleteResult;
 
 import java.util.List;
 
-import lombok.val;
-import okhttp3.Response;
 import ru.golden.weather.R;
 import ru.golden.weather.model.dto.WeatherDto;
 import ru.golden.weather.model.repository.CurrentWeatherRepository;
@@ -29,6 +26,7 @@ public class CityListPresenter extends MvpPresenter<CityListView> {
 
     public void getWeatherForCity(final String cityName) {
         currentWeatherRepository.loadCity(cityName)
+                .map(currentWeatherRepository::createDtoFromResponse)
                 .subscribe(this::onCityLoadSuccess, this::onCityLoadFailed);
     }
 
@@ -36,9 +34,7 @@ public class CityListPresenter extends MvpPresenter<CityListView> {
         showCantGetDataError(throwable);
     }
 
-    private void onCityLoadSuccess(final Response response) {
-        val weather = currentWeatherRepository.createDtoFromResponse(response);
-
+    private void onCityLoadSuccess(final WeatherDto weather) {
         if (weather == null) {
             showCantGetDataError(new Throwable());
             return;
@@ -73,10 +69,10 @@ public class CityListPresenter extends MvpPresenter<CityListView> {
 
     public void deleteCity(final String cityName) {
         currentWeatherRepository.deleteCity(cityName)
-                .subscribe(this::onCityDeleted);
+                .subscribe(result -> onCityDeleted());
     }
 
-    private void onCityDeleted(final DeleteResult deleteResult) {
+    private void onCityDeleted() {
         getViewState().showMessage(R.string.city_deleted);
         getViewState().updateCityList();
     }

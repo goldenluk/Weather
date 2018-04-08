@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.pushtorefresh.storio3.sqlite.operations.put.PutResult;
 
 import ru.golden.weather.R;
 import ru.golden.weather.model.dto.WeatherDto;
@@ -39,10 +38,10 @@ public class AddCityPresenter extends MvpPresenter<AddCityView> {
 
         currentWeatherRepository.saveCityToDb(weatherDto)
                 //Here no onError, because if we have troubles with db, we cant work
-                .subscribe(this::onSuccessCityAdd);
+                .subscribe(result -> onSuccessCityAdd());
     }
 
-    private void onSuccessCityAdd(final PutResult putResult) {
+    private void onSuccessCityAdd() {
         getViewState().finishWithOk();
     }
 }
