@@ -67,7 +67,7 @@ public class CityListActivity extends BaseActivity implements CityListView {
 
     @Override
     public void updateCityList() {
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
         cityListPresenter.initList();
     }
 
