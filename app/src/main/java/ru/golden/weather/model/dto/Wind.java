@@ -10,5 +10,5 @@ public class Wind implements Serializable {
     public Float speed;
 
     @SerializedName("deg")
-    public Integer deg;
+    public Float deg;
 }

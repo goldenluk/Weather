@@ -1,14 +1,18 @@
 package ru.golden.weather.model.repository;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
+import com.google.gson.Gson;
 import com.pushtorefresh.storio3.sqlite.operations.put.PutResult;
 
+import java.io.IOException;
 import java.util.List;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import lombok.val;
 import okhttp3.Response;
 import ru.golden.weather.model.ResponseFactory;
 import ru.golden.weather.model.URLCreator;
@@ -44,5 +48,21 @@ public class CurrentWeatherRepository {
                 .map(WeatherConverter::convertFromDbToDto)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Nullable
+    public WeatherDto createDtoFromResponse(final Response response) {
+        val gson = new Gson();
+        WeatherDto weather = null;
+
+        try {
+            if (response.body() != null) {
+                weather = gson.fromJson(response.body().string(), WeatherDto.class);
+            }
+        } catch (final IOException e) {
+            return null;
+        }
+
+        return weather;
     }
 }

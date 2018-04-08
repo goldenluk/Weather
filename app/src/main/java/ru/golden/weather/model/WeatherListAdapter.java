@@ -13,14 +13,16 @@ import ru.golden.weather.model.dto.WeatherDto;
 
 public class WeatherListAdapter extends RecyclerView.Adapter<WeatherListAdapter.ViewHolder> {
 
+    private static final double kelvin = 273.15;
+
     private List<WeatherDto> citiesWeather;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        private final View citiesWeatherView;
 
-        public ViewHolder(final View v) {
+        ViewHolder(final View v) {
             super(v);
-            textView = (TextView) v;
+            citiesWeatherView = v;
         }
     }
 
@@ -31,14 +33,23 @@ public class WeatherListAdapter extends RecyclerView.Adapter<WeatherListAdapter.
     @Override
     public WeatherListAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         final View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_city_list, parent, false);
+                .inflate(R.layout.city_weather_card, parent, false);
 
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        final WeatherDto weatherItem = citiesWeather.get(position);
 
+        final TextView cityName = holder.citiesWeatherView.findViewById(R.id.city_name);
+        cityName.setText(weatherItem.getName());
+
+        final TextView currentWeather = holder.citiesWeatherView.findViewById(R.id.current_weather);
+        currentWeather.setText(holder.citiesWeatherView.getContext()
+                .getString(R.string.current_temp, String.valueOf(weatherItem.getMain().getTemp() - kelvin).substring(0, 5)));
+
+        //TODO Кнопка подробности
     }
 
     @Override

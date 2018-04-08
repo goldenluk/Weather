@@ -4,21 +4,25 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class Main implements Serializable {
 
     @SerializedName("temp")
-    public Float temp;
+    private Float temp;
 
     @SerializedName("pressure")
-    public Integer pressure;
+    private Integer pressure;
 
     @SerializedName("humidity")
-    public Integer humidity;
+    private Integer humidity;
 
     @SerializedName("temp_min")
-    public Float tempMin;
+    private Float tempMin;
 
     @SerializedName("temp_max")
-    public Float tempMax;
+    private Float tempMax;
 }

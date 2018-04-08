@@ -1,6 +1,7 @@
 package ru.golden.weather.ui;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
@@ -10,8 +11,8 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 import java.util.List;
 
-import butterknife.BindView;
 import ru.golden.weather.R;
+import ru.golden.weather.model.WeatherListAdapter;
 import ru.golden.weather.model.dto.WeatherDto;
 import ru.golden.weather.presentation.presenter.CityListPresenter;
 import ru.golden.weather.presentation.view.CityListView;
@@ -26,7 +27,6 @@ public class CityListActivity extends MvpAppCompatActivity implements CityListVi
         return new CityListPresenter(getApplicationContext());
     }
 
-    @BindView(R.id.weather_recycler_view)
     RecyclerView weatherCityList;
 
     @Override
@@ -34,7 +34,10 @@ public class CityListActivity extends MvpAppCompatActivity implements CityListVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_list);
 
-        cityListPresenter.getWeatherForCity("Omsk");
+        weatherCityList = findViewById(R.id.weather_recycler_view);
+        weatherCityList.setLayoutManager(new LinearLayoutManager(this));
+
+        cityListPresenter.initList();
     }
 
     @Override
@@ -49,6 +52,7 @@ public class CityListActivity extends MvpAppCompatActivity implements CityListVi
 
     @Override
     public void updateCityList(final List<WeatherDto> cities) {
-
+        //it should be improved
+        weatherCityList.setAdapter(new WeatherListAdapter(cities));
     }
 }

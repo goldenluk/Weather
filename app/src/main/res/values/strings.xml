@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Weather</string>
-    <string name="loading_city_fail_message">Cant get data. Check your connection</string>
+    <string name="loading_city_fail_message">Can\'t get data. Check your connection</string>
+    <string name="current_temp">Current temp is %s C</string>
+    <string name="details_button_text">More info</string>
 </resources>

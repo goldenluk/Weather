@@ -4,9 +4,8 @@ import android.content.Context;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.google.gson.Gson;
 
-import java.io.IOException;
+import java.util.List;
 
 import lombok.val;
 import okhttp3.Response;
@@ -18,13 +17,16 @@ import ru.golden.weather.presentation.view.CityListView;
 @InjectViewState
 public class CityListPresenter extends MvpPresenter<CityListView> {
 
+    private static final String DEFAULT_CITY = "Moscow, RU";
+    private static final String DEFAULT_CITY_2 = "saint petersburg, RU";
+
     private final CurrentWeatherRepository currentWeatherRepository;
 
     public CityListPresenter(final Context context) {
         currentWeatherRepository = new CurrentWeatherRepository(context);
     }
 
-    public void getWeatherForCity(final String cityName) {
+    private void getWeatherForCity(final String cityName) {
         currentWeatherRepository.loadCity(cityName)
                 .subscribe(this::onCityLoadSuccess, this::onCityLoadFailed);
     }
@@ -34,19 +36,36 @@ public class CityListPresenter extends MvpPresenter<CityListView> {
     }
 
     private void onCityLoadSuccess(final Response response) {
-        val gson = new Gson();
-        WeatherDto weather = null;
+        val weather = currentWeatherRepository.createDtoFromResponse(response);
 
-        try {
-            if (response.body() != null) {
-                weather = gson.fromJson(response.body().string(), WeatherDto.class);
-            }
-        } catch (final IOException e) {
-            showCantGetDataError(e);
+        if (weather == null) {
+            showCantGetDataError(new Throwable());
+            return;
         }
+
+        currentWeatherRepository.saveCityToDb(weather)
+                .subscribe(result -> initList());
     }
 
     private void showCantGetDataError(final Throwable throwable) {
         getViewState().showMessage(R.string.loading_city_fail_message);
+    }
+
+    public void initList() {
+        currentWeatherRepository.getAllCitiesFromDb()
+                .subscribe(this::onGetFromDbSuccess);
+    }
+
+    private void onGetFromDbSuccess(final List<WeatherDto> weatherDtos) {
+        if (weatherDtos.isEmpty()) {
+            initDefaultCities();
+        } else {
+            getViewState().updateCityList(weatherDtos);
+        }
+    }
+
+    private void initDefaultCities() {
+        getWeatherForCity(DEFAULT_CITY);
+        getWeatherForCity(DEFAULT_CITY_2);
     }
 }
