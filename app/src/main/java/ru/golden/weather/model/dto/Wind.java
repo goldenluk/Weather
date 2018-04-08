@@ -4,11 +4,16 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Wind implements Serializable {
 
     @SerializedName("speed")
-    public Float speed;
+    private Float speed;
 
     @SerializedName("deg")
-    public Float deg;
+    private Float deg;
 }

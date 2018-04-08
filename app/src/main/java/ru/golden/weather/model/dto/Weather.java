@@ -4,17 +4,22 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class Weather implements Serializable {
 
     @SerializedName("id")
-    public Integer id;
+    private Integer id;
 
     @SerializedName("main")
-    public String main;
+    private String main;
 
     @SerializedName("description")
-    public String description;
+    private String description;
 
     @SerializedName("icon")
-    public String icon;
+    private String icon;
 }

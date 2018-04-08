@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_details"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <TextView
+        android:id="@+id/detail_info_city_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/huge_text_size"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_details"
+        tools:text="Moscow"/>
+
+    <TextView
+        android:id="@+id/detail_info_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/detail_info_title"
+        android:textSize="@dimen/big_text_size"
+        app:layout_constraintTop_toBottomOf="@id/detail_info_city_name"/>
+
+    <TextView
+        android:id="@+id/detail_info_description"
+        style="@style/DescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_info_title"
+        tools:text="Description"/>
+
+    <TextView
+        android:id="@+id/detail_info_pressure"
+        style="@style/DescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_info_description"
+        tools:text="Pressure"/>
+
+    <TextView
+        android:id="@+id/detail_info_humidity"
+        style="@style/DescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_info_pressure"
+        tools:text="Humidity"/>
+
+    <TextView
+        android:id="@+id/detail_info_wind_speed"
+        style="@style/DescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_info_humidity"
+        tools:text="Wind speed"/>
+
+    <TextView
+        android:id="@+id/detail_info_cloudiness"
+        style="@style/DescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_info_wind_speed"
+        tools:text="Cloudiness"/>
+
+    <TextView
+        android:id="@+id/detail_info_country_code"
+        style="@style/DescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_info_cloudiness"
+        tools:text="Country Code"/>
+
+</android.support.constraint.ConstraintLayout>

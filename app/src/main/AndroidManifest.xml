@@ -25,6 +25,9 @@
             android:parentActivityName=".ui.CityListActivity"/>
 
         <activity android:name=".ui.BaseActivity"/>
+        <activity
+            android:name=".ui.DetailInfoActivity"
+            android:parentActivityName=".ui.CityListActivity"/>
     </application>
 
 </manifest>

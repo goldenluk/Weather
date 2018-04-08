@@ -4,24 +4,28 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Sys implements Serializable {
 
     @SerializedName("type")
-    public Integer type;
+    private Integer type;
 
     @SerializedName("id")
-    public Integer id;
+    private Integer id;
 
     @SerializedName("message")
-    public Float message;
+    private Float message;
 
     @SerializedName("country")
-    public String country;
+    private String country;
 
     @SerializedName("sunrise")
-    public Integer sunrise;
+    private Integer sunrise;
 
     @SerializedName("sunset")
-    public Integer sunset;
+    private Integer sunset;
 }

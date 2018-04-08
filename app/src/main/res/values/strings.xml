@@ -13,4 +13,11 @@
     <string name="update_city">Update</string>
     <string name="delete_city">Delete</string>
     <string name="city_deleted">City deleted</string>
+    <string name="detail_info_title">Detail information</string>
+    <string name="detail_description">Description: %s</string>
+    <string name="pressure_value">Pressure: %s</string>
+    <string name="humidity_value">Humidity: %s percent</string>
+    <string name="wind_speed">Wind speed: %s meter/sec</string>
+    <string name="cloudiness_value">Cloudiness: %s percent</string>
+    <string name="country_code_value">Country code: %s</string>
 </resources>

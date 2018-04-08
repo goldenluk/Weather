@@ -1,6 +1,7 @@
 package ru.golden.weather.model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import lombok.val;
 import ru.golden.weather.R;
 import ru.golden.weather.model.dto.WeatherDto;
 import ru.golden.weather.ui.CityListActivity;
+import ru.golden.weather.ui.DetailInfoActivity;
 
 public class WeatherListAdapter extends RecyclerView.Adapter<WeatherListAdapter.ViewHolder> {
 
@@ -70,6 +72,13 @@ public class WeatherListAdapter extends RecyclerView.Adapter<WeatherListAdapter.
             if (context instanceof CityListActivity) {
                 ((CityListActivity) context).updateCity(weatherItem.getName());
             }
+        });
+
+        final Button moreInfoButton = holder.citiesWeatherView.findViewById(R.id.detail_weather_info_button);
+        moreInfoButton.setOnClickListener(view -> {
+            val detailIntent = new Intent(context, DetailInfoActivity.class);
+            detailIntent.putExtra(DetailInfoActivity.DETAILS_EXTRA, weatherItem);
+            context.startActivity(detailIntent);
         });
     }
 
