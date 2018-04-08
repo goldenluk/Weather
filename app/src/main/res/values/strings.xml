@@ -3,4 +3,10 @@
     <string name="loading_city_fail_message">Can\'t get data. Check your connection</string>
     <string name="current_temp">Current temp is %s C</string>
     <string name="details_button_text">More info</string>
+    <string name="add_new_city">Add city</string>
+    <string name="add_new_city_instruction">Enter city (For example Novosibirsk or Novosibirsk,RU) and press find</string>
+    <string name="enter_city_edit_text_hint">Enter city name here</string>
+    <string name="find_city_button_text">Find</string>
+    <string name="bad_find">City not found or server has problems</string>
+    <string name="city_finded">City successfully add</string>
 </resources>

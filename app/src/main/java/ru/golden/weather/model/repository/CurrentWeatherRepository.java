@@ -22,6 +22,8 @@ import ru.golden.weather.model.dto.WeatherDto;
 
 public class CurrentWeatherRepository {
 
+    private static final int CODE_OK = 200;
+
     private final WeatherListDataSource dataSource;
 
     public CurrentWeatherRepository(final Context context) {
@@ -64,5 +66,14 @@ public class CurrentWeatherRepository {
         }
 
         return weather;
+    }
+
+    @Nullable
+    public WeatherDto checkResponseAndReturnWeatherIfItExist(final Response response) {
+        if (response.code() != CODE_OK) {
+            return null;
+        }
+
+        return createDtoFromResponse(response);
     }
 }

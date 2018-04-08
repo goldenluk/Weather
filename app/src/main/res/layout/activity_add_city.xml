@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_add_city"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <TextView
+        android:id="@+id/instruction_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_small"
+        android:gravity="center"
+        android:text="@string/add_new_city_instruction"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_add_city"
+    />
+
+    <EditText
+        android:id="@+id/city_name_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_small"
+        android:hint="@string/enter_city_edit_text_hint"
+        android:maxLength="30"
+        android:maxLines="1"
+        app:layout_constraintTop_toBottomOf="@id/instruction_text_view"/>
+
+    <Button
+        android:id="@+id/find_button"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_small"
+        android:text="@string/find_city_button_text"
+        app:layout_constraintTop_toBottomOf="@id/city_name_edit_text"/>
+
+</android.support.constraint.ConstraintLayout>
