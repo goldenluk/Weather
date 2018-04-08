@@ -49,6 +49,7 @@ public class CityListPresenter extends MvpPresenter<CityListView> {
     }
 
     private void showCantGetDataError(final Throwable throwable) {
+        getViewState().stopProgress();
         getViewState().showMessage(R.string.loading_city_fail_message);
     }
 
